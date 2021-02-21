@@ -9,7 +9,9 @@
 status](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample)
 <!-- badges: end -->
 
-The goal of fars is to …
+The goal of fars is to provide summary counts of accidents that occurred
+at different states during the years 2013, 2014 & 2015. Also, it provide
+the scatter plots to visualize the same data for each state.
 
 ## Installation
 
@@ -17,7 +19,8 @@ You can install the released version of fars from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("fars")
+library(devtools)
+install_github("akbarpunjwani/msdr-rpkgexample")
 ```
 
 ## Example
