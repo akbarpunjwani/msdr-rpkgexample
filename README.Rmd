@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # fars
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample)
 <!-- badges: end -->
 
 The goal of fars is to ...
