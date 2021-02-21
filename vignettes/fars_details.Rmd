@@ -1,0 +1,82 @@
+---
+title: "FARS Package Details"
+description: "Provides a meaningful description of the package and how it should be used"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FARS Package Details}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fars)
+```
+```{r  global_options}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE,
+  warning = FALSE)
+```
+
+# FARS Package Details #
+This tutorial is about FARS package and how it could be used.
+
+The FARS, which stands for Fatality Analysis Reporting System, provided a sample data set for public access to analyze the accidents held in 2013, 2014 & 2015. 
+
+This package includes this data for internal use only. However, this package uses that data and provides a **year wise summarized counts** (*fars_summarize_years*) and the **state wise visualization plots* (*fars_map_state*) for specified year.
+
+## Data Summary ##
+The FARS Accidents data has a time series information of MONTH and YEAR of the accidents. In order to load & view the counts of accidents for each of the 12 months for the specified years, below method can be used:
+
+** fars_summarize_years(years_range) **
+Since the package includes the dataset of FARS for the years 2013 to 2015, the output would display the counts having months at row level and years at the column level. 
+In case any of the year specified in the range is not found than it will show the result for the years found and mention the warning for those that were not found.
+
+Examples:
+*fars::fars_summarize_years(2013)*
+```{r}
+fars::fars_summarize_years(2013)
+```
+*fars::fars_summarize_years(2014:2015)*
+```{r}
+fars_summarize_years(2014:2015)
+```
+*fars::fars_summarize_years(2012:2016)* (Warnings expected for 2012 & 2016)
+```{r echo = TRUE, eval=TRUE}
+fars_summarize_years(2012:2016)
+```
+
+
+```{r  messages = FALSE, echo = FALSE, eval=TRUE, warnings=TRUE, include=TRUE, results='hide', fig.height=2, fig.width=4}
+sample <- 1:10
+```
+
+## Data Visualization ##
+The FARS Accidents data contains US STATE number where the accident occured at the given MONTH and YEAR. The package uses this data to visualize it into a scatter plot for each state, using the below mentioned method:
+
+** fars_map_state(state,year) **
+Since the package includes the dataset of FARS accidents having state (1 to 13), month & year (not all years have data for each of the state), this method helps the user to visualize the data for the specified state and year.
+In case any of the state or the year specified is not found than it will prompt an error accordingly.
+
+Examples:
+*fars::fars_map_state(1,2013)*
+```{r fig.height=2, fig.width=4}
+fars::fars_map_state(1,2013)
+```
+*fars::fars_map_state(13,2013)*
+```{r fig.height=2, fig.width=4}
+fars::fars_map_state(13,2013)
+```
+*fars::fars_map_state(13,2014)*
+```{r fig.height=2, fig.width=4}
+fars::fars_map_state(13,2014)
+```
+*fars::fars_map_state(13,2015)*
+```{r fig.height=2, fig.width=4}
+fars::fars_map_state(13,2015)
+```

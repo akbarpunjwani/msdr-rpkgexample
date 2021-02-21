@@ -1,1 +1,10 @@
-exportPattern("^[[:alpha:]]+")
+export("fars_summarize_years")
+export("fars_map_state")
+
+importFrom("magrittr", "%>%")
+importFrom("readr", "read_csv")
+importFrom("dplyr", "tbl_df", "mutate", "select", "bind_rows",
+           "group_by", "summarize", "filter", "n")
+importFrom("tidyr", "spread")
+importFrom("maps", "map")
+importFrom("graphics", "points")

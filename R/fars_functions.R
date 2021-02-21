@@ -1,36 +1,4 @@
-#' @title
-#' Reads the CSV data from FARS accidents file
-#'
-#' @description
-#' The function is generic which can read data from any CSV file located
-#' at the given path and returns the data as tibble to the caller.
-#'
-#' @param filename The string filename located at current working directory
-#'   or the path along with filename. In case an incorrect filename or path
-#'   is provided, it will prompt an error file does not exist.
-#'   It may also prompt for error when file exists but data is non-csv.#'
-#'
-#' @return This function returns the data with value type as tibble in case
-#'   the file exists or prompts an error that the file does not exists
-#'
-#' @examples
-#' fars_read('accident_2013.csv.bz2')
-#' fars_read('data/accident_2013.csv.bz2')
-#'
-#' @importFrom readr read_csv
-#' @importFrom dplyr tbl_df
-#'
-#' @export
-fars_read <- function(filename) {
-  if(!file.exists(filename))
-    stop("file '", filename, "' does not exist")
-  data <- suppressMessages({
-    readr::read_csv(filename, progress = FALSE)
-  })
-  dplyr::tbl_df(data)
-}
-
-
+globalVariables(c("STATE", "MONTH", "year", "n"))
 
 #' @title
 #' Makes the year based filename
@@ -46,15 +14,48 @@ fars_read <- function(filename) {
 #' @return This function returns the string filename which if exists contain
 #'   the data for the accidents during that year
 #'
-#' @examples
-#' make_filename(2021)
+#' examples
+#' fars::make_filename(2021)
 #'
-#' @export
+#' No export
 make_filename <- function(year) {
   year <- as.integer(year)
-  sprintf("RFiles/data/accident_%d.csv.bz2", year)
+  #print(getwd())
+  #sprintf("fars/data-raw/accident_%d.csv.bz2", year)
+  system.file("extdata", sprintf("accident_%d.csv.bz2", year), package = "fars")
 }
 
+
+#' @title
+#' Reads the CSV data from FARS accidents file
+#'
+#' @description
+#' The function is generic which can read data from any CSV file located
+#' at the given path and returns the data as tibble to the caller.
+#'
+#' @param filename The string filename located at current working directory
+#'   or the path along with filename. In case an incorrect filename or path
+#'   is provided, it will prompt an error file does not exist.
+#'   It may also prompt for error when file exists but data is non-csv.#'
+#'
+#' @return This function returns the data with value type as tibble in case
+#'   the file exists or prompts an error that the file does not exists
+#'
+#' examples
+#' fars::fars_read(make_filename(2013))
+#'
+#' @importFrom readr read_csv
+#' @importFrom dplyr tbl_df
+#'
+#' No export
+fars_read <- function(filename) {
+  if(!file.exists(filename))
+    stop("file '", filename, "' does not exist")
+  data <- suppressMessages({
+    readr::read_csv(filename, progress = FALSE)
+  })
+  dplyr::tbl_df(data)
+}
 
 
 #' @title
@@ -73,15 +74,15 @@ make_filename <- function(year) {
 #' @return List of tibbles for each year, having variable for month & year.
 #'   In case of error, it would return NULL
 #'
-#' @examples
-#' fars_read_years(c(2013,2015))
-#' fars_read_years(2013:2015)
+#' examples
+#' fars::fars_read_years(c(2013,2015))
+#' fars::fars_read_years(2013:2015)
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
 #' @importFrom magrittr %>%
 #'
-#' @export
+#' No export
 fars_read_years <- function(years) {
   lapply(years, function(year) {
     file <- make_filename(year)
@@ -95,6 +96,7 @@ fars_read_years <- function(years) {
     })
   })
 }
+
 
 #' @title
 #' Summarizes the observations found in FARS data
@@ -113,13 +115,14 @@ fars_read_years <- function(years) {
 #'   the caller is been intimidated
 #'
 #' @examples
-#' fars_summarize_years(2013)
-#' fars_summarize_years(c(2013,2015))
-#' fars_summarize_years(2013:2015)
+#' fars::fars_summarize_years(2013)
+#' fars::fars_summarize_years(c(2013,2015))
+#' fars::fars_summarize_years(2013:2015)
 #'
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr group_by
 #' @importFrom dplyr summarize
+#' @importFrom dplyr n
 #' @importFrom tidyr spread
 #' @importFrom magrittr %>%
 #'
@@ -131,6 +134,8 @@ fars_summarize_years <- function(years) {
     dplyr::summarize(n = n()) %>%
     tidyr::spread(year, n)
 }
+
+
 
 #' @title
 #' Maps the FARS observations for specified state & years
@@ -147,9 +152,9 @@ fars_summarize_years <- function(years) {
 #'   state.num and year
 #'
 #' @examples
-#' fars_map_state(4,2013)
-#' fars_map_state(3,2013)
-#' fars_map_state(2,2015)
+#' fars::fars_map_state(1,2013)
+#' fars::fars_map_state(1,2014)
+#' fars::fars_map_state(1,2014)
 #'
 #' @importFrom magrittr %in%
 #' @importFrom dplyr filter
