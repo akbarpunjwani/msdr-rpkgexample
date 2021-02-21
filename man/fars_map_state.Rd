@@ -23,6 +23,6 @@ plot using the Latitude and Longitude value of each observation.
 \examples{
 fars::fars_map_state(1,2013)
 fars::fars_map_state(1,2014)
-fars::fars_map_state(1,2014)
+fars::fars_map_state(1,2015)
 
 }

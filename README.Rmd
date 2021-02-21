@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # fars
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample)
+[![Travis build status](https://travis-ci.org/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.org/akbarpunjwani/msdr-rpkgexample)
 <!-- badges: end -->
 
 The goal of fars is to provide summary counts of accidents that occurred at different states during the years 2013, 2014 & 2015. Also, it provide the scatter plots to visualize the same data for each state.

@@ -154,7 +154,7 @@ fars_summarize_years <- function(years) {
 #' @examples
 #' fars::fars_map_state(1,2013)
 #' fars::fars_map_state(1,2014)
-#' fars::fars_map_state(1,2014)
+#' fars::fars_map_state(1,2015)
 #'
 #' @importFrom magrittr %in%
 #' @importFrom dplyr filter
@@ -197,4 +197,7 @@ fars_map_state <- function(state.num, year) {
 #'
 #' @examples
 #' This block follows from next line with few valid examples
+########
+#Use below statement to oxygenize roxygen2 docs
+#roxygen2::roxygenize('.', roclets=c('rd', 'collate', 'namespace'))
 ########

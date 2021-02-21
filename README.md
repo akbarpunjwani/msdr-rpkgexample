@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Travis build
-status](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.com/akbarpunjwani/msdr-rpkgexample)
+status](https://travis-ci.org/akbarpunjwani/msdr-rpkgexample.svg?branch=main)](https://travis-ci.org/akbarpunjwani/msdr-rpkgexample)
 <!-- badges: end -->
 
 The goal of fars is to provide summary counts of accidents that occurred
